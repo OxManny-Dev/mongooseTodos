@@ -9,6 +9,12 @@ Terminology differences
 * Rows                                    Documents
 * */
 const userSchema = new Schema({
+	friendIds: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		}
+	],
 	firstName: {
 		type: String,
 		trim: true,

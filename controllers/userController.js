@@ -1,5 +1,11 @@
 const { User } = require('../models');
 
+/*
+* 6260c41c2775cd1c33535918 - Alex Holden
+* 6260c449ddf060f6ebf7dc88 - Tri Nguyen
+* 6260c4681387fea948b2783a - Levi Jones
+* */
+
 module.exports = {
 	createUser: async (req, res) => {
 		const {
@@ -104,4 +110,43 @@ module.exports = {
 			res.json(e);
 		}
 	},
+	addFriend: async (req, res) => {
+		const { userId } = req.params;
+		try {
+			const updatedUser = await User.findByIdAndUpdate(
+				userId,
+				{
+					$addToSet: {
+						friendIds: '6260c41c2775cd1c33535918',
+					}
+				},
+				{
+					new: true,
+				}
+			).populate('friendIds');
+
+			res.json(updatedUser);
+		} catch (e) {
+			res.json(e);
+		}
+	},
+	deleteFriend: async (req, res) => {
+		const { userId } = req.params;
+		try {
+			const updatedUser = await User.findByIdAndUpdate(
+				userId,
+				{
+					$pull: {
+						friendIds: '6260c41c2775cd1c33535918',
+					}
+				},
+				{
+					new: true,
+				}
+			).populate('friendIds');
+			res.json(updatedUser);
+		} catch (e) {
+			res.json(e);
+		}
+	}
 };

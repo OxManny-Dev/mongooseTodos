@@ -4,6 +4,8 @@ const {
 	getAllUsers,
 	updateUserById,
 	deleteUserById,
+	addFriend,
+	deleteFriend,
 } = require('../../../controllers/userController');
 // every route declared in here has /api/users prepended to it already
 
@@ -14,7 +16,8 @@ router.route('/')
 	.get(getAllUsers)
 	.post(createUser);
 //
-// router.put('/:id')
+router.put('/addFriend/:userId', addFriend);
+router.put('/deleteFriend/:userId', deleteFriend);
 // router.delete('/:id')
 // router.get('/:id')
 router.route('/:id')
